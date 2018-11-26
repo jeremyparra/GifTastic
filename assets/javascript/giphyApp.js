@@ -4,6 +4,9 @@ var topics = ["dog", "cat", "rabbit", "monkey", "fish", "goat", "cow", "bird", "
 // 2. Your app should take the topics in this array and create buttons in your HTML.
 //    * Try using a loop that appends a button for each string in the array.
 function makeButtons() {
+
+    $("#buttons").empty();
+
     for (var i = 0; i < topics.length; i++) {
         var a = $("<button>");
         a.addClass("animal-btn");
@@ -13,30 +16,55 @@ function makeButtons() {
     }
 }
 makeButtons();
+
+$("#add-animal").on("click", function(event) {
+
+    event.preventDefault();
+
+    var animal = $("#animal-input").val().trim();
+    topics.push(animal);
+
+    makeButtons();
+
+  });
 // 3. When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
-function displayAnimalGif() {
+
+$("#buttons").on("click", ".animal-btn", function () {
+
+    $("#gifs").empty();
+
     var animals = $(this).attr("data-name");
-    var queryURL = $.get("http://api.giphy.com/v1/gifs/search?q=" + animals + "&limit=10&api_key=Pl5tYoNRP9jz4NL3USg6v0wAMRkkjqTt");
-    // var queryURL = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=dc6zaTOxFJmzC");
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=baby+" + animals + "&limit=10&api_key=Pl5tYoNRP9jz4NL3USg6v0wAMRkkjqTt";
+    console.log(animals);
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function (response) {
-        console.log(queryURL);
-        console.log(response);
+    })
 
-        var gifDiv = $("<div class='gifs'>");
-        var rating = response.Rated;
-        var pOne = $("<p>").text("Rating: " + rating);
-        gifDiv.append(pOne);
-        var image = $("<img>").attr("src", imgURL);
-        gifDiv.append(image);
-        $("#mainContainer").append(gifDiv);
-        console.log(queryURL);
+        .then(function (response) {
+            var results = response.data;
+            console.log(response)
+            for (var i = 0; i < results.length; i++) {
+                var gifDiv = $("<div>");
+                var rating = results[i].rating;
+                var p = $("<p>").text("Rating: " + rating);
+                var animalImage = $("<img>");
+
+                animalImage.attr("src", results[i].images.fixed_height_still.url);
+                animalImage.attr("data-still", true);
+
+
+                gifDiv.append(animalImage);
+                gifDiv.append(p);
+
+                $("#gifs").prepend(gifDiv);
+            }
     });
+});
 
-}
-$("#buttons").on("click", ".animal-btn", displayAnimalGif());
+$("#gifs").on("click", "img", function () {
+    if ($());
+});
 
 
 
