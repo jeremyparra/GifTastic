@@ -1,0 +1,55 @@
+
+body{
+    background-image: url("../images/mosaic.jpg");
+}
+
+#mainContainer {
+    width: 750px;
+    border: double plum 12px;
+    margin: 0 auto;
+    border-radius: 12px;
+    background-color: white;
+}
+
+#header {
+    font-family: 'Press Start 2P', cursive;
+    color: plum;
+    text-align: center;
+    
+}
+
+.animal-btn {
+    border-radius: 5px;
+    background-color: plum;
+    text-transform: uppercase;
+    font-family: 'Baloo Tamma', cursive;
+    margin: 5px 10px 0px 10px;
+
+}
+ #animal-input {
+     margin: 40px 0px 0px 10px;
+     width: 300px;
+ }
+
+#add-animal {
+    margin: 7px;
+    border-radius: 5px;
+    color: plum;
+    text-transform: uppercase;
+    font-family: 'Baloo Tamma', cursive;
+}
+
+#rating {
+    font-family: 'Baloo Tamma', cursive;
+    margin-left: 5px;
+}
+
+#gifs {
+    
+}
+
+.gif {
+    margin-left: 5px;
+    border: gold dotted 10px;
+    padding: 3px;
+}
